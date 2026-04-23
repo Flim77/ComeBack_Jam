@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d35ce8rerknjp"
-path="res://.godot/imported/lazy.png-6586f096cb3491be2c377045871ed746.ctex"
+uid="uid://bf3dqbbseparu"
+path="res://.godot/imported/KillFlake.png-91762f6e4affb2ddcfd015f624d230f5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://lazy.png"
-dest_files=["res://.godot/imported/lazy.png-6586f096cb3491be2c377045871ed746.ctex"]
+source_file="res://Images/KillFlake.png"
+dest_files=["res://.godot/imported/KillFlake.png-91762f6e4affb2ddcfd015f624d230f5.ctex"]
 
 [params]
 

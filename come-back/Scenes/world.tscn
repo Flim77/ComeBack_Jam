@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://clueq27v2h6or"]
 
-[ext_resource type="Texture2D" uid="uid://d35ce8rerknjp" path="res://lazy.png" id="1_f3sb7"]
+[ext_resource type="Texture2D" uid="uid://d35ce8rerknjp" path="res://Images/lazy.png" id="1_f3sb7"]
 
 [node name="World" type="Node2D" unique_id=311205939]
 
