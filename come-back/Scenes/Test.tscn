@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://co84lr3nqpll1" path="res://Scenes/player.tscn" id="1_ko2s7"]
 [ext_resource type="Texture2D" uid="uid://cjb24hksh0lxt" path="res://Images/TileMap.png" id="2_gxb1y"]
+[ext_resource type="PackedScene" uid="uid://b73ckwjjyexda" path="res://Scenes/passWall.tscn" id="3_0dy5s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0dy5s"]
 texture = ExtResource("2_gxb1y")
@@ -129,3 +130,6 @@ tile_set = SubResource("TileSet_gxb1y")
 position = Vector2(105, 31.999992)
 scale = Vector2(2.8298318, 2.168859)
 zoom = Vector2(0.215, 0.215)
+
+[node name="StaticBody2D" parent="." unique_id=997201193 instance=ExtResource("3_0dy5s")]
+position = Vector2(-133, -58)

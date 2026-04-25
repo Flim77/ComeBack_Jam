@@ -18,6 +18,11 @@ extends CharacterBody2D
 # --- Wall ---
 @export var wall_slide_speed := 100.0
 @export var wall_jump_force := Vector2(300, -400)
+@export var wall_climb_speed := 80.0
+@export var wall_climb_hold_force := 50.0 # small stick force into wall
+
+# -- Elements grabs --
+@export var DeathTimer: Timer
 
 # --- States ---
 var jump_count := 0
@@ -26,15 +31,29 @@ var is_dashing := false
 var dash_timer := 0.0
 var dash_dir := 0
 
+# ---Game Triggers ---
+var jumpUnlock = true
+var dashUnlock = true
+var wallJumpUnlock = true
+var airDashUnlock = true
+var mitosisUnlock = true 
+# for faster speed and double jump we can edit 
+# preexisting variables
+
 func _physics_process(delta):
 	apply_gravity(delta)
 	handle_movement(delta)
-	handle_jump()
-	handle_dash(delta)
-	handle_wall()
+	
+	if jumpUnlock:
+		handle_jump()
+	if dashUnlock:
+		handle_dash(delta)
+	if wallJumpUnlock:
+		handle_wall()
+	if mitosisUnlock:
+		handle_mitosis()
 	
 	move_and_slide()
-
 	reset_states()
 
 
@@ -68,8 +87,20 @@ func jump():
 
 
 func handle_wall():
-	if is_on_wall() and not is_on_floor() and velocity.y > 0:
-		velocity.y = min(velocity.y, wall_slide_speed)
+	var touching_wall = is_on_wall() and not is_on_floor()
+	var input_dir = Input.get_axis("move_left", "move_right")
+	var vertical_input = Input.get_axis("move_up", "move_down")
+	
+	if touching_wall:
+		var wall_normal = get_wall_normal().x
+		if input_dir != 0 and sign(input_dir) == -sign(wall_normal):
+			if vertical_input != 0:
+				velocity.y = vertical_input * wall_climb_speed
+			else:
+				velocity.y = 0
+			velocity.x = -wall_normal * wall_climb_hold_force
+		elif velocity.y > 0:
+			velocity.y = min(velocity.y, wall_slide_speed)
 
 func wall_jump():
 	var wall_dir = get_wall_normal().x
@@ -108,3 +139,20 @@ func reset_states():
 	if is_on_floor():
 		jump_count = 0
 		can_dash = true
+
+func pass_block():
+	set_collision_mask_value(2, false)
+
+func handle_mitosis():
+	if Input.is_action_just_pressed("split"):
+		DeathTimer.start()
+		
+
+func death():
+	#add your death animation or whatevs
+	
+	await get_tree().create_timer(2.0).timeout
+	get_tree().reload_current_scene()
+
+func _on_death_timer_timeout() -> void:
+	death()

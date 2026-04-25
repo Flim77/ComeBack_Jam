@@ -8,9 +8,12 @@ size = Vector2(111, 116)
 
 [node name="Player" type="Node2D" unique_id=1596911018]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=939211943]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=939211943 node_paths=PackedStringArray("DeathTimer")]
 position = Vector2(70, -63)
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_cvnsp")
+DeathTimer = NodePath("../DeathTimer")
 
 [node name="Icon" type="Sprite2D" parent="CharacterBody2D" unique_id=2058208569]
 position = Vector2(1, -1)
@@ -19,3 +22,9 @@ texture = ExtResource("1_v0iea")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=2094173348]
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="DeathTimer" type="Timer" parent="." unique_id=652407585]
+wait_time = 15.0
+autostart = true
+
+[connection signal="timeout" from="DeathTimer" to="CharacterBody2D" method="_on_death_timer_timeout"]
