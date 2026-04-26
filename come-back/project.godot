@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/show_image=false
 config/icon="res://Images/icon.svg"
 
+[autoload]
+
+Level="*uid://bgpvihk4wdx5u"
+
 [display]
 
 window/size/viewport_width=320

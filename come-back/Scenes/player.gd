@@ -1,14 +1,14 @@
 extends CharacterBody2D
 
 # --- Movement ---
-@export var speed := 250.0
+@export var speed := 150.0
 @export var acceleration := 1200.0
 @export var friction := 1000.0
 
 # --- Jumping ---
 @export var jump_velocity := -400.0
 @export var gravity := 900.0
-@export var max_jumps := 2
+@export var max_jumps = Level.trueMax_jumps
 
 # --- Dash ---
 @export var dash_speed := 600.0
@@ -30,13 +30,10 @@ var can_dash := true
 var is_dashing := false
 var dash_timer := 0.0
 var dash_dir := 0
+var has_moved_once = false
 
-# ---Game Triggers ---
-var jumpUnlock = true
-var dashUnlock = true
-var wallJumpUnlock = true
-var airDashUnlock = true
-var mitosisUnlock = true 
+
+
 
 # --- Animation ---
 @onready var csprite = $AnimatedSprite2D
@@ -61,13 +58,15 @@ func _physics_process(delta):
 	handle_movement(delta)
 	_handle_animation()
 	
-	if jumpUnlock:
+
+	
+	if Level.jumpUnlock:
 		handle_jump()
-	if dashUnlock:
+	if Level.dashUnlock:
 		handle_dash(delta)
-	if wallJumpUnlock:
+	if Level.wallJumpUnlock:
 		handle_wall()
-	if mitosisUnlock:
+	if Level.mitosisUnlock:
 		handle_mitosis()
 		
 	camera_movement_match()
@@ -77,10 +76,13 @@ func _physics_process(delta):
 
 func handle_movement(delta):
 	var direction = Input.get_axis("move_left", "move_right")
-	
+	if direction != 0:
+		if not has_moved_once:
+			DeathTimer.start()
+			has_moved_once = true
 	if not is_dashing:
 		if direction != 0:
-			velocity.x = move_toward(velocity.x, direction * speed, acceleration * delta)
+			velocity.x = move_toward(velocity.x, direction * (speed + Level.speedAdd), acceleration * delta)
 		else:
 			velocity.x = move_toward(velocity.x, 0, friction * delta)
 
@@ -158,7 +160,7 @@ func _handle_animation():
 			dashin = false
 		return
 		
-	if Input.is_action_just_pressed("dash") and can_dash:
+	if Input.is_action_just_pressed("dash") and can_dash and Level.dashUnlock:
 		dashin = true
 		if is_on_floor():
 			play_anim("dash")
@@ -248,8 +250,9 @@ func handle_mitosis():
 
 func death():
 	#add your death animation or whatevs
-	
+	Level.deathCount += 1
 	await get_tree().create_timer(2.0).timeout
+	handle_upgrade()
 	get_tree().reload_current_scene()
 	
 func play_anim(name):
@@ -259,3 +262,25 @@ func play_anim(name):
 func _on_death_timer_timeout() -> void:
 	death()
 	
+func handle_upgrade():
+	match Level.deathCount:
+		1:
+			Level.jumpUnlock = true
+		2:
+			Level.speedAdd += 200
+		3:
+			Level.dashUnlock = true
+		4:
+			pass_block()
+		5:
+			Level.trueMax_jumps = 2
+		6:
+			Level.wallJumpUnlock = true
+		7:
+			Level.airDashUnlock = true
+		8:
+			Level.mitosisUnlock = true
+		9:
+			#add your out of time junk here
+			pass
+			

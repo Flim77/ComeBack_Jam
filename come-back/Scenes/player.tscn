@@ -323,6 +323,5 @@ speed_scale = 3.0
 
 [node name="DeathTimer" type="Timer" parent="." unique_id=652407585]
 wait_time = 200.0
-autostart = true
 
 [connection signal="timeout" from="DeathTimer" to="CharacterBody2D" method="_on_death_timer_timeout"]
