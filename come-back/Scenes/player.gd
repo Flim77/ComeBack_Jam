@@ -42,9 +42,9 @@ var fall_lock = false
 var dashin = false
 
 # --- Camera ---
-@export var cam_height: int = 480
-@export var cam_lower_limit: int = 0
-@export var cam_upper_limit: int = 480
+@export var cam_height: int = 720
+@export var cam_lower_limit: int = 360
+@export var cam_upper_limit: int = -360
 
 signal change_camera_pos
 

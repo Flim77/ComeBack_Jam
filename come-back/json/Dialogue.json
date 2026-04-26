@@ -1,0 +1,31 @@
+{
+    "Death1": [
+        "Maybe you should try jumping?"
+    ],
+    "Death2": [
+        "Let's pick up the pace a little!"
+    ],
+    "Death3": [
+        "Unless you could go faster?"
+    ],
+    "Death4": [
+        "This fabric seems a bit weak..."
+    ],
+    "Death5": [
+        "Even the air can be physical."
+    ],
+    "Death6": [
+        "Scale the Walls!"
+    ],
+    "Death7": [
+        "Dash the Air!"
+    ],
+    "Death8": [
+        "Looks like you're on your last life.",
+        "Hope you don't run out of time! (E)"
+    ],
+    "Win": [
+        "Enjoy the Meal!"
+    ]
+    
+}

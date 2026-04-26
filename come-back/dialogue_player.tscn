@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://ckboswkre2i5l"]
+
+[node name="DialoguePlayer" type="CanvasLayer" unique_id=1810972167]
+
+[node name="Background" type="TextureRect" parent="." unique_id=2020157479]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="." unique_id=1739067316]
+offset_right = 40.0
+offset_bottom = 23.0
