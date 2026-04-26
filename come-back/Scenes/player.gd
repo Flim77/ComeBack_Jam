@@ -37,12 +37,29 @@ var dashUnlock = true
 var wallJumpUnlock = true
 var airDashUnlock = true
 var mitosisUnlock = true 
+
+# --- Animation ---
+@onready var csprite = $AnimatedSprite2D
+var was_moving = false
+var fall_lock = false
+var dashin = false
+
+# --- Camera ---
+@export var cam_height: int = 480
+@export var cam_lower_limit: int = 0
+@export var cam_upper_limit: int = 480
+
+signal change_camera_pos
+
+
+
 # for faster speed and double jump we can edit 
 # preexisting variables
 
 func _physics_process(delta):
 	apply_gravity(delta)
 	handle_movement(delta)
+	_handle_animation()
 	
 	if jumpUnlock:
 		handle_jump()
@@ -52,7 +69,8 @@ func _physics_process(delta):
 		handle_wall()
 	if mitosisUnlock:
 		handle_mitosis()
-	
+		
+	camera_movement_match()
 	move_and_slide()
 	reset_states()
 
@@ -121,6 +139,86 @@ func handle_dash(delta):
 		if dash_timer <= 0:
 			end_dash()
 
+func _handle_animation():
+	var direction = Input.get_axis("move_left", "move_right")
+	var is_moving = abs(velocity.x) > 0
+
+	#Flips direction
+	if direction != 0:
+		csprite.flip_h = direction < 0
+	
+	#Dash anim
+	if dashin:
+		if is_on_floor():
+			play_anim("dash")
+		else:
+			play_anim("airdash")
+			
+		if csprite.animation in ["dash", "airdash"] and not csprite.is_playing():
+			dashin = false
+		return
+		
+	if Input.is_action_just_pressed("dash") and can_dash:
+		dashin = true
+		if is_on_floor():
+			play_anim("dash")
+		else:
+			play_anim("airdash")
+		return
+		
+	
+	#Wall Anims
+	
+	if is_on_wall() and not is_on_floor():
+		if direction == -get_wall_normal().x:
+			if Input.is_action_pressed("move_up"):
+				play_anim("climbup")
+			elif Input.is_action_pressed("move_down"):
+				play_anim("climbdown")
+			else:
+				play_anim("wall")
+			return
+	#Air anims
+	if not is_on_floor():
+		if velocity.y < 0:
+			if is_moving:
+				play_anim("jumpdir")
+			else:
+				play_anim("jump")
+		else:
+			if not fall_lock:
+				fall_lock = is_moving
+		
+			if fall_lock:
+				play_anim("fallmove")
+			else:
+				play_anim("fall")
+		return
+		
+	fall_lock = false
+		
+	# Ground Anims
+	if not was_moving and is_moving:
+		play_anim("move_between")
+	elif was_moving and not is_moving:
+		play_anim("move_between")
+	elif is_moving:
+		play_anim("move")
+	else:
+		play_anim("idle")
+	was_moving = is_moving
+	
+func camera_movement_match():
+	if position.y < cam_upper_limit:
+		cam_lower_limit -= cam_height
+		cam_upper_limit -= cam_height
+		change_camera_pos.emit(cam_upper_limit)
+	
+	if position.y > cam_lower_limit:
+		cam_lower_limit += cam_height
+		cam_upper_limit += cam_height
+		change_camera_pos.emit(cam_upper_limit)
+
 func start_dash():
 	is_dashing = true
 	can_dash = false
@@ -153,6 +251,11 @@ func death():
 	
 	await get_tree().create_timer(2.0).timeout
 	get_tree().reload_current_scene()
-
+	
+func play_anim(name):
+	if csprite.animation != name:
+		csprite.play(name)
+		
 func _on_death_timer_timeout() -> void:
 	death()
+	
