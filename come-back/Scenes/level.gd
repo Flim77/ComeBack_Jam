@@ -2,6 +2,7 @@ extends Node2D
 
 # ---Game Triggers ---
 @export var deathCount = 0
+@export var trans = 0
 var speedAdd = 200
 var jumpUnlock = true
 var dashUnlock = true

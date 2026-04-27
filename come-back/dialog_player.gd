@@ -9,6 +9,7 @@ var is_fading := false
 
 @onready var background = $Background
 @onready var text_label = $Text_Label
+@onready var tuna = $tuna
 
 
 func _enter_tree():
@@ -18,9 +19,15 @@ func _enter_tree():
 
 func _ready():
 	background.visible = false
+	tuna.visible = false
 	background.modulate.a = 1.0
 	text_label.modulate.a = 1.0
-
+	tuna.modulate.a = 1.0
+	
+	text_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	
+	
+	
 	scene_text = load_scene_text()
 
 	SingalBus.connect("dialog_fade", Callable(self, "fade_out_dialog"))
@@ -44,6 +51,7 @@ func on_display_dialog(text_key):
 		return
 
 	background.visible = true
+	tuna.visible = true
 	in_progress = true
 	selected_text = scene_text[text_key].duplicate()
 
@@ -56,9 +64,11 @@ func show_text():
 
 	background.visible = true
 	text_label.visible = true
+	tuna.visible = true
 
 	background.modulate.a = 1.0
 	text_label.modulate.a = 1.0
+	tuna.modulate.a = 1.0
 
 	text_label.text = selected_text.pop_front()
 
@@ -84,10 +94,12 @@ func fade_out_dialog():
 	
 	background.visible = true
 	text_label.visible = true
+	tuna.visible = true
 
 	var tween = create_tween()
 	tween.tween_property(background, "modulate:a", 0.0, 0.15)
 	tween.parallel().tween_property(text_label, "modulate:a", 0.0, 0.15)
+	tween.parallel().tween_property(tuna, "modulate:a", 0.0, 0.15)
 
 	await tween.finished
 	is_fading = false 

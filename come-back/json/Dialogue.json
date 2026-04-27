@@ -6,13 +6,13 @@
         "Let's pick up the pace a little!"
 	],
 	"Death3": [
-        "Unless you could go faster?"
+        "Maybe a dash?"
 	],
 	"Death4": [
         "This fabric seems a bit weak..."
 	],
 	"Death5": [
-        "Even the air can be physical."
+        "Some air time now"
 	],
 	"Death6": [
         "Scale the Walls!"
@@ -21,11 +21,7 @@
         "Dash the Air!"
 	],
 	"Death8": [
-		"Looks like you're on your last life.",
-        "Hope you don't run out of time! (E)"
-	],
-	"Win": [
-        "Enjoy the Meal!"
+		"Last life. Maybe it's time to split. (Z)"
 	]
 	
 }

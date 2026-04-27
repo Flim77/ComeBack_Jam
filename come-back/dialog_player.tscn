@@ -3,6 +3,44 @@
 [ext_resource type="Script" uid="uid://72nr3vc8waxx" path="res://dialog_player.gd" id="1_75bwt"]
 [ext_resource type="Texture2D" uid="uid://dcxbr0l288kov" path="res://Images/UI Things/UI Thingy1.png" id="1_knm3x"]
 [ext_resource type="FontFile" uid="uid://cujxhj2viimnx" path="res://json/Round9x13.ttf" id="2_75bwt"]
+[ext_resource type="Texture2D" uid="uid://ckx5wmiu8jrco" path="res://Images/Tuna Sprites/TunaTalk.png" id="4_sqms3"]
+[ext_resource type="Script" uid="uid://ctqah3xet216o" path="res://running.gd" id="5_q6tql"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6tql"]
+atlas = ExtResource("4_sqms3")
+region = Rect2(0, 0, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqylm"]
+atlas = ExtResource("4_sqms3")
+region = Rect2(96, 0, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rs38"]
+atlas = ExtResource("4_sqms3")
+region = Rect2(192, 0, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3x6ov"]
+atlas = ExtResource("4_sqms3")
+region = Rect2(288, 0, 96, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m6s2p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6tql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqylm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4rs38")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3x6ov")
+}],
+"loop": true,
+"name": &"go",
+"speed": 2.0
+}]
 
 [node name="DialogPlayer" type="CanvasLayer" unique_id=279592040]
 process_mode = 3
@@ -21,8 +59,9 @@ metadata/_edit_use_anchors_ = true
 [node name="Text_Label" type="Label" parent="." unique_id=1703332475]
 z_index = 8
 anchors_preset = -1
-anchor_left = 0.08125
+anchor_left = 0.090625
 anchor_top = -0.03888889
+anchor_right = 0.028125
 anchor_bottom = -0.011111111
 offset_left = 215.0
 offset_top = 49.0
@@ -32,5 +71,14 @@ theme_override_colors/font_color = Color(0.8627451, 0.47058824, 0, 1)
 theme_override_fonts/font = ExtResource("2_75bwt")
 theme_override_font_sizes/font_size = 10
 horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="tuna" type="AnimatedSprite2D" parent="." unique_id=284694751]
+position = Vector2(280, 159.00002)
+scale = Vector2(0.8645833, 0.8125)
+sprite_frames = SubResource("SpriteFrames_m6s2p")
+animation = &"go"
+speed_scale = 7.0
+script = ExtResource("5_q6tql")
