@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://dl1fnag7j0vgr"]
+
+[ext_resource type="Script" uid="uid://bj5d10wkpg0hw" path="res://movingPlatform.gd" id="1_f5thg"]
+[ext_resource type="Texture2D" uid="uid://d35ce8rerknjp" path="res://Images/lazy.png" id="2_7n2fh"]
+
+[sub_resource type="Curve2D" id="Curve2D_3h4et"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -52, 0, 0, 0, 0, 0, 1)
+}
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mby7g"]
+
+[sub_resource type="Animation" id="Animation_taob0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_uvhgu"]
+resource_name = "Up_Down_Block"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-1.56, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4w2xh"]
+_data = {
+&"RESET": SubResource("Animation_taob0"),
+&"Up_Down_Block": SubResource("Animation_uvhgu")
+}
+
+[node name="Path2D" type="Path2D" unique_id=1747616124]
+curve = SubResource("Curve2D_3h4et")
+script = ExtResource("1_f5thg")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=2117088180]
+position = Vector2(0, -52)
+rotation = 1.5707964
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D" unique_id=1983664321]
+remote_path = NodePath("../../AnimatableBody2D")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=2065602773]
+position = Vector2(0, -51.993977)
+rotation = 1.5707964
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D" unique_id=1861170353]
+texture = ExtResource("2_7n2fh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=423414180]
+shape = SubResource("RectangleShape2D_mby7g")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1888883949]
+libraries/ = SubResource("AnimationLibrary_4w2xh")

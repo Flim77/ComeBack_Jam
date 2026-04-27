@@ -17,6 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://bq8bhe3b1xdgq" path="res://Images/UI Things/UI Thingy8.png" id="12_tww1q"]
 [ext_resource type="Texture2D" uid="uid://ca53sjbv85ace" path="res://Images/UI Things/UI Thingy9.png" id="13_2qiau"]
 [ext_resource type="Texture2D" uid="uid://dote3msbv1edd" path="res://Images/UI Things/UI Thingy10.png" id="14_50rxc"]
+[ext_resource type="Texture2D" uid="uid://byspmm0sx0fk3" path="res://Images/nail.png" id="18_07y4a"]
+[ext_resource type="Script" uid="uid://4kso6h8npt2x" path="res://Scenes/kill_block.gd" id="18_65pw5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0dy5s"]
 texture = ExtResource("2_gxb1y")
@@ -131,10 +133,13 @@ sources/0 = SubResource("TileSetAtlasSource_0dy5s")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_06fis"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_65pw5"]
+size = Vector2(3.1218982, 18.503494)
+
 [node name="Level" type="Node2D" unique_id=1392105413]
 script = ExtResource("1_efk68")
 
-[node name="Player" parent="." unique_id=1596911018 instance=ExtResource("1_ko2s7")]
+[node name="Player" parent="." unique_id=1596911018 groups=["Player"] instance=ExtResource("1_ko2s7")]
 position = Vector2(-372, 353)
 scale = Vector2(0.5, 0.48)
 
@@ -195,6 +200,21 @@ texture = ExtResource("5_efk68")
 [node name="DialogPlayer" parent="." unique_id=279592040 instance=ExtResource("8_ki7sg")]
 layer = 2
 
+[node name="KillBlock" type="Area2D" parent="." unique_id=497892978]
+position = Vector2(329.99997, 370.99997)
+scale = Vector2(8.007948, 4.7039495)
+script = ExtResource("18_65pw5")
+
+[node name="Sprite2D" type="Sprite2D" parent="KillBlock" unique_id=670935778]
+scale = Vector2(0.19101161, 0.38774845)
+texture = ExtResource("18_07y4a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillBlock" unique_id=180904031]
+position = Vector2(0.06243801, 0.74825287)
+scale = Vector2(1.3088657, 0.9123264)
+shape = SubResource("RectangleShape2D_65pw5")
+
 [connection signal="change_camera_pos" from="Player/CharacterBody2D" to="." method="_on_character_body_2d_change_camera_pos"]
+[connection signal="body_entered" from="KillBlock" to="KillBlock" method="_on_body_entered"]
 
 [editable path="Player"]
