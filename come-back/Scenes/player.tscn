@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://crmpj1a2fc2wi" path="res://Scenes/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://dwoxn6bf1vdpm" path="res://Images/Player Sprite/SlimeDash2.png" id="2_8erm5"]
+[ext_resource type="Texture2D" uid="uid://c3ipgsw6m318h" path="res://Images/Enemy/Enemy-Sheet.png" id="2_tx1dd"]
 [ext_resource type="Texture2D" uid="uid://csq0le056n177" path="res://Images/Player Sprite/SlimeCatWall.png" id="3_f1ek2"]
 [ext_resource type="Texture2D" uid="uid://c3v4bqot0vayk" path="res://Images/Player Sprite/SlimeDash1.png" id="4_tx1dd"]
 [ext_resource type="Texture2D" uid="uid://be5bagmcleyim" path="res://Images/Player Sprite/SlimeCatDeath.png" id="5_gymyn"]
@@ -12,6 +13,42 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bi64h"]
+atlas = ExtResource("2_tx1dd")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ijsl"]
+atlas = ExtResource("2_tx1dd")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11gg7"]
+atlas = ExtResource("2_tx1dd")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpa8y"]
+atlas = ExtResource("2_tx1dd")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7t2e"]
+atlas = ExtResource("2_tx1dd")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nmr2m"]
+atlas = ExtResource("2_tx1dd")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ax3m3"]
+atlas = ExtResource("2_tx1dd")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vlem"]
+atlas = ExtResource("2_tx1dd")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8eeqe"]
+atlas = ExtResource("2_tx1dd")
+region = Rect2(288, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fd4e3"]
 atlas = ExtResource("2_8erm5")
@@ -139,6 +176,43 @@ region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_v0iea"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bi64h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ijsl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11gg7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpa8y")
+}],
+"loop": true,
+"name": &"Enemy_a",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7t2e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nmr2m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ax3m3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vlem")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8eeqe")
+}],
+"loop": true,
+"name": &"Enemy_b",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 0.6,
 "texture": SubResource("AtlasTexture_fd4e3")
@@ -318,10 +392,11 @@ shape = SubResource("RectangleShape2D_onrkg")
 position = Vector2(0.9999962, -1.0000038)
 scale = Vector2(4, 3.9999998)
 sprite_frames = SubResource("SpriteFrames_v0iea")
-animation = &"idle"
+animation = &"Enemy_b"
 speed_scale = 3.0
 
 [node name="DeathTimer" type="Timer" parent="." unique_id=652407585]
 wait_time = 200.0
+one_shot = true
 
 [connection signal="timeout" from="DeathTimer" to="CharacterBody2D" method="_on_death_timer_timeout"]

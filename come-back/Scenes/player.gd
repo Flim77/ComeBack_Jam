@@ -3,7 +3,7 @@ extends CharacterBody2D
 # --- Movement ---
 @export var speed := 150.0
 @export var acceleration := 1200.0
-@export var friction := 1000.0
+@export var friction := 1500.0
 
 # --- Jumping ---
 @export var jump_velocity := -400.0
@@ -40,6 +40,7 @@ var has_moved_once = false
 var was_moving = false
 var fall_lock = false
 var dashin = false
+var is_dead := false
 
 # --- Camera ---
 var current_cam_index := 0
@@ -60,6 +61,11 @@ func _ready() -> void:
 
 func _physics_process(delta):
 	apply_gravity(delta)
+	
+	if is_dead:
+		move_and_slide()
+		return
+	
 	handle_movement(delta)
 	_handle_animation()
 	
@@ -81,6 +87,12 @@ func _physics_process(delta):
 
 func handle_movement(delta):
 	var direction = Input.get_axis("move_left", "move_right")
+	
+	if SingalBus.wait_for_dialog:
+		if Input.is_action_just_pressed("move_left") or Input.is_action_just_pressed("move_right"):
+			SingalBus.wait_for_dialog = false
+			SingalBus.emit_signal("dialog_fade")
+			
 	if direction != 0:
 		if not has_moved_once:
 			DeathTimer.start()
@@ -147,9 +159,14 @@ func handle_dash(delta):
 			end_dash()
 
 func _handle_animation():
+	if is_dead:
+		return
+	
 	var direction = Input.get_axis("move_left", "move_right")
 	var is_moving = abs(velocity.x) > 0
 
+
+	#if Input.is_action_just_pressed("split"):
 	#Flips direction
 	if direction != 0:
 		csprite.flip_h = direction < 0
@@ -263,10 +280,21 @@ func handle_mitosis():
 		
 
 func death():
-	#add your death animation or whatevs
+	if is_dead:
+		return
+		
+	is_dead = true
+	DeathTimer.stop()
+	velocity.x = 0
+	play_anim("death")
+	while csprite.is_playing():
+		await get_tree().process_frame
+	
+	
 	Level.deathCount += 1
 	await get_tree().create_timer(2.0).timeout
 	handle_upgrade()
+	SingalBus.wait_for_dialog = true
 	get_tree().reload_current_scene()
 	
 func play_anim(name):
