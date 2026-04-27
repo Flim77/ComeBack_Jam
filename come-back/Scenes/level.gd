@@ -2,14 +2,16 @@ extends Node2D
 
 # ---Game Triggers ---
 @export var deathCount = 0
-var speedAdd = 0
-var jumpUnlock = false
-var dashUnlock = false
-var wallJumpUnlock = false
-var airDashUnlock = false
-var mitosisUnlock = false 
-var trueMax_jumps = 1
+var speedAdd = 200
+var jumpUnlock = true
+var dashUnlock = true
+var wallJumpUnlock = true
+var airDashUnlock = true
+var passWallUnlock = true
+var mitosisUnlock = true 
+var trueMax_jumps = 2
 
+	
 
 func _on_player_change_camera_pos(player_pos):
 	$Camera2D.position.y = player_pos

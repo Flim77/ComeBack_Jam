@@ -42,9 +42,11 @@ var fall_lock = false
 var dashin = false
 
 # --- Camera ---
-@export var cam_height: int = 720
+var current_cam_index := 0
+@export var cam_height := 720
 @export var cam_lower_limit: int = 360
 @export var cam_upper_limit: int = -360
+
 
 signal change_camera_pos
 
@@ -52,6 +54,9 @@ signal change_camera_pos
 
 # for faster speed and double jump we can edit 
 # preexisting variables
+func _ready() -> void:
+	if Level.passWallUnlock:
+		pass_block()
 
 func _physics_process(delta):
 	apply_gravity(delta)
@@ -210,16 +215,25 @@ func _handle_animation():
 		play_anim("idle")
 	was_moving = is_moving
 	
+
+
 func camera_movement_match():
-	if position.y < cam_upper_limit:
-		cam_lower_limit -= cam_height
-		cam_upper_limit -= cam_height
-		change_camera_pos.emit(cam_upper_limit)
+	var center_y = current_cam_index * cam_height + cam_height / 2
 	
-	if position.y > cam_lower_limit:
-		cam_lower_limit += cam_height
-		cam_upper_limit += cam_height
-		change_camera_pos.emit(cam_upper_limit)
+	# Moving UP
+	if global_position.y < center_y - (cam_height / 2):
+		current_cam_index -= 1
+		emit_camera()
+
+	# Moving DOWN
+	elif global_position.y > center_y + (cam_height / 2):
+		current_cam_index += 1
+		emit_camera()
+
+
+func emit_camera():
+	var new_cam_y = current_cam_index * cam_height + cam_height / 2
+	change_camera_pos.emit(new_cam_y)
 
 func start_dash():
 	is_dashing = true
