@@ -73,10 +73,7 @@ func _physics_process(delta):
 	if Level.jumpUnlock:
 		handle_jump()
 	if Level.dashUnlock:
-		if Level.airDashUnlock:
-			handle_dash(delta)
-		elif is_on_floor():
-			handle_dash(delta)
+		handle_dash(delta)
 	if Level.wallJumpUnlock:
 		handle_wall()
 	if Level.mitosisUnlock:
@@ -153,7 +150,12 @@ func wall_jump():
 
 func handle_dash(delta):
 	if Input.is_action_just_pressed("dash") and can_dash:
-		start_dash()
+		if Level.airDashUnlock:
+			start_dash()
+		elif is_on_floor():
+			start_dash()
+		else:
+			return
 
 	if is_dashing:
 		dash_timer -= delta
@@ -344,7 +346,7 @@ func handle_upgrade():
 		3:
 			Level.dashUnlock = true
 		4:
-			pass_block()
+			Level.passWallUnlock = true
 			Level.deathTimerTime = 30
 		5:
 			Level.trueMax_jumps = 2

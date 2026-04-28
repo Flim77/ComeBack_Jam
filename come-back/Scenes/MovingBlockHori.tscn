@@ -1,11 +1,11 @@
-[gd_scene format=3 uid="uid://dl1fnag7j0vgr"]
+[gd_scene format=3 uid="uid://dxtt76jh4gp6g"]
 
-[ext_resource type="Script" uid="uid://bj5d10wkpg0hw" path="res://movingPlatform.gd" id="1_f5thg"]
-[ext_resource type="Texture2D" uid="uid://clcilvj2001o0" path="res://Images/Other Sprites/Platfor.png" id="2_5yu3o"]
+[ext_resource type="Script" uid="uid://bj5d10wkpg0hw" path="res://movingPlatform.gd" id="1_ibkmg"]
+[ext_resource type="Texture2D" uid="uid://clcilvj2001o0" path="res://Images/Other Sprites/Platfor.png" id="2_o6ecf"]
 
 [sub_resource type="Curve2D" id="Curve2D_3h4et"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, -52, 0, 0, 0, 0, 0.9470935, 243.73413)
+"points": PackedVector2Array(0, 0, 0, 0, 0, -52, 0, 0, -6.7107525, -1.1246439, 201.96191, -51.849915)
 }
 point_count = 2
 
@@ -39,7 +39,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(-1.56, -1.55),
+"transitions": PackedFloat32Array(-1.56, 1),
 "update": 0,
 "values": [0.0, 1.0]
 }
@@ -52,26 +52,28 @@ _data = {
 
 [node name="Path2D" type="Path2D" unique_id=1747616124]
 curve = SubResource("Curve2D_3h4et")
-script = ExtResource("1_f5thg")
+script = ExtResource("1_ibkmg")
 loop = false
 
 [node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=2117088180]
 position = Vector2(0, -52)
-rotation = 1.5675938
+rotation = 0.00074313727
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D" unique_id=1983664321]
 remote_path = NodePath("../../AnimatableBody2D")
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=2065602773]
 position = Vector2(0, -52)
-rotation = 1.5675938
+rotation = 0.00074313727
+scale = Vector2(0.99999994, 0.99999994)
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D" unique_id=1861170353]
-rotation = -1.5707964
-texture = ExtResource("2_5yu3o")
+rotation = 0.01758647
+texture = ExtResource("2_o6ecf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=423414180]
 position = Vector2(0.5, 9.536745e-07)
+rotation = 1.5666531
 shape = SubResource("RectangleShape2D_mby7g")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1888883949]
