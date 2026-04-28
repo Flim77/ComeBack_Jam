@@ -31,6 +31,7 @@ var is_dashing := false
 var dash_timer := 0.0
 var dash_dir := 0
 var has_moved_once = false
+var mitosis_count = 5
 
 # --- Animation ---
 @onready var csprite = $AnimatedSprite2D
@@ -56,6 +57,7 @@ func _ready() -> void:
 	if Level.trans == 1:
 		transition.play("out")
 		Level.trans = 0
+	DeathTimer.wait_time = Level.deathTimerTime
 
 
 func _physics_process(delta):
@@ -271,11 +273,11 @@ func pass_block():
 
 
 func handle_mitosis():
-	if Input.is_action_just_pressed("split"):
+	if Input.is_action_just_pressed("split") and mitosis_count > 0:
 		if not is_on_floor():
 			return
 		DeathTimer.start()
-		
+		mitosis_count -= 1
 		var fallguy = mitosis.instantiate()
 		get_parent().add_child(fallguy)
 		
@@ -333,20 +335,24 @@ func handle_upgrade():
 	match Level.deathCount:
 		1:
 			Level.jumpUnlock = true
+			Level.deathTimerTime = 45
 		2:
 			Level.speedAdd += 200
 		3:
 			Level.dashUnlock = true
 		4:
 			pass_block()
+			Level.deathTimerTime = 30
 		5:
 			Level.trueMax_jumps = 2
 		6:
 			Level.wallJumpUnlock = true
+			Level.deathTimerTime = 20
 		7:
 			Level.airDashUnlock = true
 		8:
 			Level.mitosisUnlock = true
+			Level.deathTimerTime = 15
 		9:
 			pass
 

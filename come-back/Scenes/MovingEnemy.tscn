@@ -7,7 +7,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_3h4et"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 16.588762, -25.142227, 0, 0, 0, 0, -45.83738, -23.002457)
+"points": PackedVector2Array(0, 0, 0, 0, 16.588762, -25.142227, 0, 0, 0, 0, 110.88278, -26.212097)
 }
 point_count = 2
 
@@ -102,14 +102,14 @@ loop = false
 
 [node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=2117088180]
 position = Vector2(16.588762, -25.142227)
-rotation = 3.1073291
+rotation = -0.011345619
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D" unique_id=1983664321]
 remote_path = NodePath("../../Area2D")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1993605996]
 position = Vector2(16.588762, -25.142227)
-rotation = 3.1073291
+rotation = -0.01134562
 script = ExtResource("2_136qh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=423414180]

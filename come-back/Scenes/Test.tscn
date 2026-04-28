@@ -489,7 +489,7 @@ scale = Vector2(4.5, 4.7842593)
 texture = ExtResource("24_50rxc")
 
 [node name="Moving enemy" parent="." unique_id=1747616124 instance=ExtResource("25_8vvoa")]
-position = Vector2(-41.999996, 428)
+position = Vector2(-135, 410.00003)
 scale = Vector2(2.290707, 1.8693657)
 
 [node name="Spikes" type="Node" parent="." unique_id=1163625380]
