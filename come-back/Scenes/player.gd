@@ -31,7 +31,7 @@ var is_dashing := false
 var dash_timer := 0.0
 var dash_dir := 0
 var has_moved_once = false
-var mitosis_count = 5
+var mitosis_count = 9
 
 # --- Animation ---
 @onready var csprite = $AnimatedSprite2D
@@ -55,7 +55,11 @@ func _ready() -> void:
 	if Level.passWallUnlock:
 		pass_block()
 	if Level.trans == 1:
-		transition.play("out")
+		if Level.deathCount > 8:
+			transition.play("transitioning")
+			
+		else:
+			transition.play("out")
 		Level.trans = 0
 	DeathTimer.wait_time = Level.deathTimerTime
 
@@ -316,7 +320,10 @@ func death():
 	Level.trans = 1
 	
 	await get_tree().create_timer(0.5).timeout
-	transition.play("in")
+	if Level.deathCount > 8:
+		transition.play("undu")
+	else:
+		transition.play("in")
 	await transition.animation_finished
 	await get_tree().create_timer(1.0).timeout
 	handle_upgrade()
@@ -340,26 +347,28 @@ func handle_upgrade():
 	match Level.deathCount:
 		1:
 			Level.jumpUnlock = true
-			Level.deathTimerTime = 45
+			Level.deathTimerTime = 90
 		2:
 			Level.speedAdd += 200
 		3:
 			Level.dashUnlock = true
 		4:
 			Level.passWallUnlock = true
-			Level.deathTimerTime = 30
+			Level.deathTimerTime = 75
 		5:
 			Level.trueMax_jumps = 2
 		6:
 			Level.wallJumpUnlock = true
-			Level.deathTimerTime = 20
+			Level.deathTimerTime = 60
 		7:
 			Level.airDashUnlock = true
 		8:
 			Level.mitosisUnlock = true
-			Level.deathTimerTime = 15
+			Level.deathTimerTime = 40
 		9:
-			pass
+			Level.resetGame()
+			#transition.play("transitioning")
+			
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

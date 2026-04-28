@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dbir8s0rqk4xj"]
+
+[ext_resource type="Texture2D" uid="uid://ehgk08j5g0gu" path="res://Images/UI Things/Win-Sheet.png" id="1_d8xbi"]
+[ext_resource type="Script" uid="uid://ctqah3xet216o" path="res://running.gd" id="2_82r0j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fy21p"]
+atlas = ExtResource("1_d8xbi")
+region = Rect2(0, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_douls"]
+atlas = ExtResource("1_d8xbi")
+region = Rect2(160, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qhgi"]
+atlas = ExtResource("1_d8xbi")
+region = Rect2(320, 0, 160, 90)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vlss6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fy21p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_douls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6qhgi")
+}],
+"loop": true,
+"name": &"go",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D" unique_id=343891982]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=374909742]
+position = Vector2(160.00002, 90)
+scale = Vector2(2, 1.9999999)
+sprite_frames = SubResource("SpriteFrames_vlss6")
+animation = &"go"
+script = ExtResource("2_82r0j")
