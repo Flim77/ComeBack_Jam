@@ -7,12 +7,12 @@
 
 [sub_resource type="Curve2D" id="Curve2D_3h4et"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 16.588762, -25.142227, 0, 0, 0, 0, 110.88278, -26.212097)
+"points": PackedVector2Array(0, 0, 0, 0, 16.588762, -25.142227, 0, 0, 0, 0, 150.60852, -27.28199)
 }
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mby7g"]
-size = Vector2(28.20808, 26.984158)
+size = Vector2(21.677904, 21.997196)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_136qh"]
 atlas = ExtResource("3_6i7f3")
@@ -102,18 +102,18 @@ loop = false
 
 [node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=2117088180]
 position = Vector2(16.588762, -25.142227)
-rotation = -0.011345619
+rotation = -0.01596467
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D" unique_id=1983664321]
 remote_path = NodePath("../../Area2D")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1993605996]
 position = Vector2(16.588762, -25.142227)
-rotation = -0.01134562
+rotation = -0.01596467
 script = ExtResource("2_136qh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=423414180]
-position = Vector2(0.51527786, 0.4119835)
+position = Vector2(-0.5750027, -0.042793274)
 shape = SubResource("RectangleShape2D_mby7g")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D" unique_id=1648583975]

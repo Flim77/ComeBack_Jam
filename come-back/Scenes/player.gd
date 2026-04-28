@@ -73,7 +73,10 @@ func _physics_process(delta):
 	if Level.jumpUnlock:
 		handle_jump()
 	if Level.dashUnlock:
-		handle_dash(delta)
+		if Level.airDashUnlock:
+			handle_dash(delta)
+		elif is_on_floor():
+			handle_dash(delta)
 	if Level.wallJumpUnlock:
 		handle_wall()
 	if Level.mitosisUnlock:
@@ -174,7 +177,7 @@ func _handle_animation():
 	if dashin:
 		if is_on_floor():
 			play_anim("dash")
-		else:
+		elif Level.airDashUnlock:
 			play_anim("airdash")
 
 		if csprite.animation in ["dash", "airdash"] and not csprite.is_playing():
@@ -185,7 +188,7 @@ func _handle_animation():
 		dashin = true
 		if is_on_floor():
 			play_anim("dash")
-		else:
+		elif Level.airDashUnlock:
 			play_anim("airdash")
 		return
 
