@@ -12,16 +12,16 @@
         "This fabric seems a bit weak..."
 	],
 	"Death5": [
-        "Some air time now"
+        "Some air\n time now!"
 	],
 	"Death6": [
-        "Scale the Walls!"
+        "Scale the\n Walls!"
 	],
 	"Death7": [
-        "Dash the Air!"
+        "Air Dash\n even!"
 	],
 	"Death8": [
-		"Last life. Maybe it's time to split. (Z)"
+		"Last life.\n Maybe it's\n time to\n split. (Z)"
 	]
 	
 }

@@ -34,6 +34,7 @@ var has_moved_once = false
 
 # --- Animation ---
 @onready var csprite = $AnimatedSprite2D
+@export var mitosis: PackedScene
 @onready var transition = get_tree().current_scene.get_node("Trans/Transition")
 var was_moving = false
 var fall_lock = false
@@ -76,7 +77,7 @@ func _physics_process(delta):
 	if Level.mitosisUnlock:
 		handle_mitosis()
 		
-	camera_movement_match()
+	#camera_movement_match()
 	move_and_slide()
 	reset_states()
 
@@ -271,7 +272,25 @@ func pass_block():
 
 func handle_mitosis():
 	if Input.is_action_just_pressed("split"):
+		if not is_on_floor():
+			return
 		DeathTimer.start()
+		
+		var fallguy = mitosis.instantiate()
+		get_parent().add_child(fallguy)
+		
+		fallguy.global_position = global_position
+		var fake_sprite = fallguy.get_node("AnimatedSprite2D")
+
+		
+		fake_sprite.scale = csprite.scale
+		fake_sprite.offset = csprite.offset
+		fake_sprite.flip_h = csprite.flip_h
+		
+		fallguy.start()
+		var dir = -1 if csprite.flip_h else 1
+		velocity.x += 600 * dir
+		velocity.y = -250
 
 
 func death():
@@ -288,7 +307,8 @@ func death():
 
 	Level.deathCount += 1
 	Level.trans = 1
-
+	
+	await get_tree().create_timer(0.5).timeout
 	transition.play("in")
 	await transition.animation_finished
 	await get_tree().create_timer(1.0).timeout
@@ -306,7 +326,9 @@ func play_anim(name):
 func _on_death_timer_timeout() -> void:
 	death()
 
-
+func _on_body_entered(body):
+	return
+		
 func handle_upgrade():
 	match Level.deathCount:
 		1:
@@ -327,3 +349,7 @@ func handle_upgrade():
 			Level.mitosisUnlock = true
 		9:
 			pass
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

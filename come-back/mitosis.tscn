@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://byaufcganxwsu"]
+
+[ext_resource type="Texture2D" uid="uid://cedujoism1lba" path="res://Images/Player Sprite/Mitosis.png" id="1_vhejg"]
+[ext_resource type="Script" uid="uid://b23pg5mr7dwwp" path="res://mitosis.gd" id="2_wjwm2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5snj"]
+atlas = ExtResource("1_vhejg")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5fx5e"]
+atlas = ExtResource("1_vhejg")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qyv6e"]
+atlas = ExtResource("1_vhejg")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwujc"]
+atlas = ExtResource("1_vhejg")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvbg8"]
+atlas = ExtResource("1_vhejg")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_865ry"]
+atlas = ExtResource("1_vhejg")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvda8"]
+atlas = ExtResource("1_vhejg")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2r5n1"]
+atlas = ExtResource("1_vhejg")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o6cax"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_d5snj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5fx5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qyv6e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwujc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvbg8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_865ry")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wvda8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2r5n1")
+}],
+"loop": true,
+"name": &"split_n_die",
+"speed": 5.0
+}]
+
+[node name="Mitosis" type="Node2D" unique_id=348898179]
+script = ExtResource("2_wjwm2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=393810786]
+position = Vector2(16, 16)
+sprite_frames = SubResource("SpriteFrames_o6cax")
+animation = &"split_n_die"
+speed_scale = 2.5
+script = ExtResource("2_wjwm2")

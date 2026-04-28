@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://crmpj1a2fc2wi" path="res://Scenes/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://dwoxn6bf1vdpm" path="res://Images/Player Sprite/SlimeDash2.png" id="2_8erm5"]
+[ext_resource type="PackedScene" uid="uid://byaufcganxwsu" path="res://mitosis.tscn" id="2_gymyn"]
 [ext_resource type="Texture2D" uid="uid://c3ipgsw6m318h" path="res://Images/Enemy/Enemy-Sheet.png" id="2_tx1dd"]
 [ext_resource type="Texture2D" uid="uid://csq0le056n177" path="res://Images/Player Sprite/SlimeCatWall.png" id="3_f1ek2"]
 [ext_resource type="Texture2D" uid="uid://c3v4bqot0vayk" path="res://Images/Player Sprite/SlimeDash1.png" id="4_tx1dd"]
@@ -382,7 +383,9 @@ position = Vector2(70, -63)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_cvnsp")
+wall_climb_speed = 120.0
 DeathTimer = NodePath("../DeathTimer")
+mitosis = ExtResource("2_gymyn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=2094173348]
 position = Vector2(1, -1)
@@ -392,7 +395,7 @@ shape = SubResource("RectangleShape2D_onrkg")
 position = Vector2(0.9999962, -1.0000038)
 scale = Vector2(4, 3.9999998)
 sprite_frames = SubResource("SpriteFrames_v0iea")
-animation = &"Enemy_b"
+animation = &"idle"
 speed_scale = 3.0
 
 [node name="DeathTimer" type="Timer" parent="." unique_id=652407585]
