@@ -77,7 +77,7 @@ func _physics_process(delta):
 	if Level.mitosisUnlock:
 		handle_mitosis()
 		
-	#camera_movement_match()
+	camera_movement_match()
 	move_and_slide()
 	reset_states()
 

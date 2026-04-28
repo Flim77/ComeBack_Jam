@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://c5pkyp83lfikg" path="res://Images/Tuna Sprites/TunaWait.png" id="19_2qiau"]
 [ext_resource type="Script" uid="uid://ctqah3xet216o" path="res://running.gd" id="20_50rxc"]
 [ext_resource type="Texture2D" uid="uid://0ckkq51maf0q" path="res://Images/UI Things/Background3.png" id="24_50rxc"]
+[ext_resource type="PackedScene" uid="uid://b13r2iu1tsdsv" path="res://Scenes/MovingEnemy.tscn" id="25_8vvoa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0dy5s"]
 texture = ExtResource("2_gxb1y")
@@ -318,7 +319,7 @@ tile_map_data = PackedByteArray("AAD2/w0AAAAEAAYAAAD1/w0AAAAEAAYAAAD0/w0AAAAEAAY
 tile_set = SubResource("TileSet_gxb1y")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=403361389]
-position = Vector2(106, 38.000004)
+position = Vector2(96.00001, 355.00003)
 scale = Vector2(8.007948, 4.7039495)
 zoom = Vector2(0.215, 0.215)
 
@@ -394,6 +395,10 @@ z_index = -2
 position = Vector2(100, -1974)
 scale = Vector2(4.5, 4.5)
 texture = ExtResource("24_50rxc")
+
+[node name="Moving enemy" parent="." unique_id=1747616124 instance=ExtResource("25_8vvoa")]
+position = Vector2(-41.999996, 428)
+scale = Vector2(2.290707, 1.8693657)
 
 [connection signal="change_camera_pos" from="Player/CharacterBody2D" to="." method="_on_character_body_2d_change_camera_pos"]
 [connection signal="body_entered" from="KillBlock" to="KillBlock" method="_on_body_entered"]
