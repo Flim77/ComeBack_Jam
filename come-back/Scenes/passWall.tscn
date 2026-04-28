@@ -1,17 +1,18 @@
 [gd_scene format=3 uid="uid://b73ckwjjyexda"]
 
-[ext_resource type="Texture2D" uid="uid://bf3dqbbseparu" path="res://Images/KillFlake.png" id="1_jh2o3"]
+[ext_resource type="Texture2D" uid="uid://cpojnh7rq4s7m" path="res://Images/Other Sprites/Fake Wall.png" id="1_jh2o3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f2nln"]
-size = Vector2(20, 144)
+size = Vector2(24, 95)
 
 [node name="StaticBody2D" type="StaticBody2D" unique_id=997201193]
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1511432027]
+position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_f2nln")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=274929624]
-rotation = 1.571733
-scale = Vector2(0.6001123, 1)
+position = Vector2(-4.7683716e-07, -2.5000005)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_jh2o3")

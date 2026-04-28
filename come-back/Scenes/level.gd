@@ -5,12 +5,12 @@ extends Node2D
 @export var trans = 0
 var speedAdd = 200
 var jumpUnlock = true
-var dashUnlock = true
-var wallJumpUnlock = true
-var airDashUnlock = true
-var passWallUnlock = true
-var mitosisUnlock = true 
-var trueMax_jumps = 2
+var dashUnlock = false
+var wallJumpUnlock = false
+var airDashUnlock = false
+var passWallUnlock = false
+var mitosisUnlock = false
+var trueMax_jumps = 1
 
 	
 

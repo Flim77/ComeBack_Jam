@@ -1,9 +1,9 @@
-[gd_scene format=3 uid="uid://b13r2iu1tsdsv"]
+[gd_scene format=3 uid="uid://dfo83rd8cvn1m"]
 
-[ext_resource type="Script" uid="uid://bj5d10wkpg0hw" path="res://movingPlatform.gd" id="1_3eqtc"]
-[ext_resource type="Script" uid="uid://q5uotm6xe35c" path="res://Scenes/Enemy.gd" id="2_136qh"]
-[ext_resource type="Texture2D" uid="uid://c3ipgsw6m318h" path="res://Images/Enemy/Enemy-Sheet.png" id="3_6i7f3"]
-[ext_resource type="Script" uid="uid://ctqah3xet216o" path="res://running.gd" id="4_136qh"]
+[ext_resource type="Script" uid="uid://bj5d10wkpg0hw" path="res://movingPlatform.gd" id="1_5f3w3"]
+[ext_resource type="Script" uid="uid://q5uotm6xe35c" path="res://Scenes/Enemy.gd" id="2_iy48k"]
+[ext_resource type="Script" uid="uid://ctqah3xet216o" path="res://running.gd" id="3_24nq4"]
+[ext_resource type="Texture2D" uid="uid://c3ipgsw6m318h" path="res://Images/Enemy/Enemy-Sheet.png" id="4_imdye"]
 
 [sub_resource type="Curve2D" id="Curve2D_3h4et"]
 _data = {
@@ -12,45 +12,38 @@ _data = {
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mby7g"]
-size = Vector2(28.20808, 26.984158)
+size = Vector2(33, 20)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_136qh"]
-atlas = ExtResource("3_6i7f3")
-region = Rect2(160, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0uua"]
+atlas = ExtResource("4_imdye")
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bdq23"]
-atlas = ExtResource("3_6i7f3")
-region = Rect2(192, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2jiy"]
+atlas = ExtResource("4_imdye")
+region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m6867"]
-atlas = ExtResource("3_6i7f3")
-region = Rect2(224, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4q6t"]
+atlas = ExtResource("4_imdye")
+region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8srxl"]
-atlas = ExtResource("3_6i7f3")
-region = Rect2(256, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqhea"]
+atlas = ExtResource("4_imdye")
+region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yetu8"]
-atlas = ExtResource("3_6i7f3")
-region = Rect2(288, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_i58r3"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_7hvhu"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_136qh")
+"texture": SubResource("AtlasTexture_a0uua")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bdq23")
+"texture": SubResource("AtlasTexture_u2jiy")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_m6867")
+"texture": SubResource("AtlasTexture_t4q6t")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8srxl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yetu8")
+"texture": SubResource("AtlasTexture_fqhea")
 }],
 "loop": true,
 "name": &"go",
@@ -97,7 +90,7 @@ _data = {
 
 [node name="Path2D" type="Path2D" unique_id=1747616124]
 curve = SubResource("Curve2D_3h4et")
-script = ExtResource("1_3eqtc")
+script = ExtResource("1_5f3w3")
 loop = false
 
 [node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=2117088180]
@@ -110,17 +103,18 @@ remote_path = NodePath("../../Area2D")
 [node name="Area2D" type="Area2D" parent="." unique_id=1993605996]
 position = Vector2(16.588762, -25.142227)
 rotation = 3.1073291
-script = ExtResource("2_136qh")
+script = ExtResource("2_iy48k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=423414180]
-position = Vector2(0.51527786, 0.4119835)
+position = Vector2(-0.08876228, 6.142227)
 shape = SubResource("RectangleShape2D_mby7g")
+script = ExtResource("3_24nq4")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D" unique_id=1648583975]
-sprite_frames = SubResource("SpriteFrames_i58r3")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D" unique_id=1367391098]
+sprite_frames = SubResource("SpriteFrames_7hvhu")
 animation = &"go"
-speed_scale = 1.5
-script = ExtResource("4_136qh")
+speed_scale = 2.0
+script = ExtResource("3_24nq4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1888883949]
 libraries/ = SubResource("AnimationLibrary_4w2xh")

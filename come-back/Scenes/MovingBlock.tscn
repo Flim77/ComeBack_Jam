@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dl1fnag7j0vgr"]
 
 [ext_resource type="Script" uid="uid://bj5d10wkpg0hw" path="res://movingPlatform.gd" id="1_f5thg"]
-[ext_resource type="Texture2D" uid="uid://d35ce8rerknjp" path="res://Images/lazy.png" id="2_7n2fh"]
+[ext_resource type="Texture2D" uid="uid://clcilvj2001o0" path="res://Images/Other Sprites/Platfor.png" id="2_5yu3o"]
 
 [sub_resource type="Curve2D" id="Curve2D_3h4et"]
 _data = {
@@ -10,6 +10,7 @@ _data = {
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mby7g"]
+size = Vector2(23, 64)
 
 [sub_resource type="Animation" id="Animation_taob0"]
 length = 0.001
@@ -66,9 +67,11 @@ position = Vector2(0, -52)
 rotation = 1.5707964
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D" unique_id=1861170353]
-texture = ExtResource("2_7n2fh")
+rotation = -1.5707964
+texture = ExtResource("2_5yu3o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=423414180]
+position = Vector2(0.5, 9.536745e-07)
 shape = SubResource("RectangleShape2D_mby7g")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1888883949]
